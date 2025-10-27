@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { breads } from "../data";
 import type { bread } from "../data";
@@ -22,8 +22,8 @@ function HeaderNav(props: props) {
 
    const [searchResults, setSearchResults] = useState<bread[] | []>([]);
 
-
-
+   const inputRef = useRef<HTMLInputElement | null>(null);
+   const searchDisplayRef = useRef<HTMLDivElement | null>(null);
 
    const navButton = {
       background: "none",
@@ -46,7 +46,7 @@ function HeaderNav(props: props) {
 
          if (name.includes(normalizedQuery) || description.includes(normalizedQuery)) return true;
 
-         return bread.recipe.some(step => normalize(step).includes(normalizedQuery));
+         return bread.recipe.some(prev => normalize(prev).includes(normalizedQuery));
       });
 
       setSearchResults(results);
@@ -54,11 +54,116 @@ function HeaderNav(props: props) {
    }, [wildCard]);
 
 
+   useEffect(() => {
+      function handleClickOutside(event: MouseEvent) {
+         if (
+            inputRef.current &&
+            !inputRef.current.contains(event.target as Node) &&
+            searchDisplayRef.current &&
+            !searchDisplayRef.current.contains(event.target as Node)
+         ) {
+            setWildCard('');
+         }
+      }
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+         document.removeEventListener('mousedown', handleClickOutside);
+      };
+   }, []);
+
+   function renderSearchDisplay() {
+      const limit = 6;
+
+      if (!searchResults || searchResults.length === 0) return null;
+
+      const display = [];
+
+      for (let i = 0; i < Math.min(limit, searchResults.length); i++) {
+         display.push({
+            imgUrl: searchResults[i].imgUrl,
+            name: searchResults[i].name,
+            description: searchResults[i].description,
+         });
+      }
+
+      return (
+         <div
+            ref={searchDisplayRef}
+            style={{
+               position: "fixed",
+               display: "flex",
+               flexDirection: "column",
+               width: "382px",
+               gap: "10px",
+               marginTop: "86px",
+               background: pal[5],
+               justifyContent: "flex-end",
+               right: "0px",
+               alignItems: "center",
+               boxShadow: boxShad,
+               zIndex: 6,
+               paddingBottom: "8px"
+
+            }}
+
+         >
+            {display.map((item, i) => (
+               <button
+                  key={i}
+                  style={{
+                     display: "flex",
+                     flexDirection: "column",
+                     width: "362px",
+                     background: pal[0],
+                     padding: "4px",
+                     margin: "4px",
+                     borderRadius: '4px',
+                     border: 'none',
+                  }}
+                  type='button'
+                  //@ts-ignore
+                  onClick={() => { nav(`/breads/${item.imgUrl.split('/').pop().split('.')[0]}`); setWildCard('') }}
+               >
+                  <div
+                     style={{
+                        display: "flex",
+                        width: "100%",
+                        justifyContent: "flex-start",
+                        alignItems: "flex-end",
+                     }}
+                  >
+                     <img
+                        style={{
+                           width: "32px",
+                           aspectRatio: "1 / 1",
+                           boxShadow: boxShad,
+                           padding: '4px',
+                           margin: "4px",
+                           marginRight: "16px"
+                        }}
+                        src={item.imgUrl}
+                        alt={`a photo of ${item.name}`}
+                     />
+
+                     <p style={{ color: "balck", fontSize: "16px", marginLeft: "8px" }}>{item.name}</p>
+
+
+                  </div>
+               </button>
+            ))}
+         </div>
+      );
+   }
+
+
+
+
 
    return (
       <>
          <div
             style={{
+               position: "fixed",
                display: "flex",
                width: "100%",
                height: "86px",
@@ -69,12 +174,13 @@ function HeaderNav(props: props) {
          >
 
 
+
             <nav
                style={{
                   display: "flex",
                   height: "70%",
                   backgroundColor: pal[3],
-                  width: navBar ? "194px" : "16px",
+                  width: navBar ? "194px" : "32px",
                   borderRadius: "0px 8px 8px 0px",
                   flexDirection: "row-reverse",
                   transition: "350ms",
@@ -82,7 +188,6 @@ function HeaderNav(props: props) {
                   boxShadow: boxShad
                }}
             >
-
                <button
                   style={{
                      fontSize: "32px",
@@ -90,10 +195,11 @@ function HeaderNav(props: props) {
                      fontFamily: "joan",
                      background: pal[4],
                      border: "none",
+                     padding: "16px",
+                     paddingTop: "0px",
                      paddingBottom: "18px",
                      color: pal[2],
-                     width: "16px",
-
+                     width: "8px",
                   }}
                   type='button'
                   onClick={() => setNavBar(prev => !prev)}
@@ -191,7 +297,7 @@ function HeaderNav(props: props) {
                }}
             >
 
-               <h1 style={{ color: "white", fontSize: "2.4em", alignItems: "center" }}>Lets Get This Bread</h1>
+               <h1 style={{ color: "white", fontSize: window.innerWidth < 1080 ? "1em" : "2.4em", alignItems: "center", flexShrink: "1" }}>Lets Get This Bread</h1>
 
                <div
                   style={{
@@ -212,6 +318,7 @@ function HeaderNav(props: props) {
                      {/* @ts-ignore */}
                   </ion-icon>
                   <input
+                     ref={inputRef}
                      type='text'
                      maxLength={50}
                      placeholder='Search . . .'
@@ -227,12 +334,18 @@ function HeaderNav(props: props) {
                         background: pal[0]
                      }}
                   />
+
                </div>
 
             </div>
 
 
          </div>
+
+
+         {renderSearchDisplay()}
+
+
       </>
    )
 }

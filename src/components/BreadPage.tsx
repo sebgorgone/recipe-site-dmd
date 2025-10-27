@@ -47,7 +47,8 @@ function BreadPage(props: bread) {
                display: "flex",
                width: "100%",
                alignItems: "stretch",
-               minHeight: "calc(100vh - 86px)"
+               minHeight: "calc(100vh - 86px)",
+               paddingTop: "118px"
             }}
          >
 
@@ -115,6 +116,7 @@ function BreadPage(props: bread) {
                         boxShadow: boxShad,
                      }}
                      src={imgUrl}
+                     alt={`a photo of ${name}`}
                   />
 
                   <h1

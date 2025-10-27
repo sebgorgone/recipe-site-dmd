@@ -21,8 +21,7 @@ function Home() {
 
 
   function breadDisplay() {
-    console.log(Math.floor(window.innerWidth / 237))
-    const displayBreadLength = Math.floor(window.innerWidth / 237);
+    const displayBreadLength = 8;
 
     const indecies: Set<number> = new Set();
 
@@ -43,9 +42,9 @@ function Home() {
             boxShadow: boxShad,
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
             padding: ".5em",
-            border: "none"
+            border: "none",
+            alignItems: "center"
           }}
           type='button'
           // @ts-ignore
@@ -55,7 +54,8 @@ function Home() {
           <div
             style={{
               display: "flex",
-              alignItems: "baseline",
+              alignItems: "flex-start",
+              justifyContent: "flex-start",
               width: "90%"
             }}
           >
@@ -69,11 +69,11 @@ function Home() {
               }}
             />
 
-            <h3 style={{ color: "white", marginLeft: "1em", fontSize: "1.5em" }}>{breads[index].name}</h3>
+            <h3 style={{ color: "white", marginLeft: "1em", fontSize: "1.5em", width: "80%", textAlign: "left" }}>{breads[index].name}</h3>
 
           </div>
 
-          <p style={{ color: 'white' }}>{breads[index].description}</p>
+          <p style={{ color: 'white', marginTop: "6px", fontSize: "18px", width: "90%", textAlign: "center" }}>{breads[index].description}</p>
 
 
         </button>
@@ -93,7 +93,8 @@ function Home() {
         style={{
           display: "flex",
           width: "100%",
-          alignItems: "stretch"
+          alignItems: "stretch",
+          paddingTop: "86px"
         }}
       >
 
@@ -102,7 +103,7 @@ function Home() {
             display: "flex",
             width: "50%",
             justifyContent: "flex-start",
-            flexDirection: "column"
+            flexDirection: "column",
           }}
         >
 
@@ -241,6 +242,8 @@ function Home() {
 
           </div>
 
+          <a href='#/about' style={{fontFamily: 'judson-italic', width: "100%", textAlign: "center", fontSize: "24px", margin: "1em", paddingRight: "10%"}}>About Lets Get This Bread</a>
+
 
         </article>
 
@@ -257,7 +260,7 @@ function Home() {
             borderRadius: "16px",
             flexDirection: "column",
             alignItems: "center",
-            flexGrow: "1",
+            height: "fit-content",
 
           }}
         >
