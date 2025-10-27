@@ -1,0 +1,48 @@
+@font-face {
+   font-family: 'joan';
+   src: url('/fonts/joan.ttf') format('truetype')
+}
+
+@font-face {
+   font-family: 'judson';
+   src: url('/fonts/judson.ttf') format('truetype')
+}
+
+@font-face {
+   font-family: 'judson-italic';
+   src: url('/fonts/judsoni.ttf') format('truetype')
+}
+
+@font-face {
+   font-family: 'judson-bold';
+   src: url('/fonts/judsonb.ttf') format('truetype')
+}
+
+h1{
+   font-family: 'judson-bold'
+}
+
+h3 {
+   font-family: 'judson-italic';
+}
+
+p {
+   font-family: 'joan';
+   margin: 0;
+}
+
+h2 {
+   font-family: 'judson';
+}
+
+* { 
+   box-sizing: border-box;
+}
+
+body {
+   margin: 0;
+}
+
+button:hover {
+   opacity: 70%
+}
