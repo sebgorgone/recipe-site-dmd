@@ -2,9 +2,12 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 
+import { breads } from './data.ts';
+
 import './index.css';
 import Home from './Home.tsx';
-import About from './About.tsx'
+import About from './About.tsx';
+import BreadPage from './components/BreadPage.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -17,6 +20,11 @@ createRoot(document.getElementById('root')!).render(
         <Route path='/home' element={<Home />} />
 
         <Route path='/about' element={<About />} />
+
+        {breads.map((bread, i) => (
+          //@ts-ignore
+          <Route key={i} path={`/breads/${bread.imgUrl.split('/').pop().split('.')[0]}` }  element={<BreadPage name={bread.name} imgUrl={bread.imgUrl} description={bread.description} history={bread.history} ingredients={bread.ingredients} recipe={bread.recipe} />}/>
+        ))}
 
 
       </Routes>

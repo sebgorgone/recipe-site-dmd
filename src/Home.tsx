@@ -1,9 +1,11 @@
 import HeaderNav from "./components/HeaderNav";
 import { breads } from "./data";
-import type { bread } from "./data";
+import { useNavigate } from "react-router-dom";
 
 
 function Home() {
+
+  const nav = useNavigate()
 
   const pal =
     [
@@ -18,12 +20,9 @@ function Home() {
   const boxShad = '0 1px 1px rgba(0, 0, 0, 0.8), 0 3px 3px rgba(0, 0, 0, 0.6), 0 6px 6px rgba(0, 0, 0, 0.4), 0 8px 8px rgba(0, 0, 0, 0.3)';
 
 
-  console.log(breads)
-
-  
-
-  function breadDisplay () {
-    const displayBreadLength = 5;
+  function breadDisplay() {
+    console.log(Math.floor(window.innerWidth / 237))
+    const displayBreadLength = Math.floor(window.innerWidth / 237);
 
     const indecies: Set<number> = new Set();
 
@@ -33,11 +32,9 @@ function Home() {
 
     const iArray = Array.from(indecies)
 
-    console.log(iArray.map(i => breads[i]))
-    
     return (
       iArray.map((index, i) => (
-        <div 
+        <button
           key={i}
           style={{
             margin: "1em",
@@ -47,41 +44,45 @@ function Home() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            padding: ".5em"
+            padding: ".5em",
+            border: "none"
           }}
+          type='button'
+          // @ts-ignore
+          onClick={() => nav(`/breads/${breads[index].imgUrl.split('/').pop().split('.')[0]}`)}
         >
 
-         <div
-          style={{
-            display: "flex",
-            alignItems: "baseline",
-            width: "90%"
-          }}
-         >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "baseline",
+              width: "90%"
+            }}
+          >
 
-          <img
-          src={`${breads[index].imgUrl}`}
-          alt={`${breads[index].name} icon`}
-          style={{
-            width: "20%",
-            aspectRatio: "1 / 1"
-          }}
-          />
+            <img
+              src={`${breads[index].imgUrl}`}
+              alt={`${breads[index].name} icon`}
+              style={{
+                width: "20%",
+                aspectRatio: "1 / 1"
+              }}
+            />
 
-          <h3 style={{color: "white", marginLeft: "1em", fontSize: "1.5em"}}>{breads[index].name}</h3>
+            <h3 style={{ color: "white", marginLeft: "1em", fontSize: "1.5em" }}>{breads[index].name}</h3>
 
-         </div>
+          </div>
 
-        <p style={{color: 'white'}}>{breads[index].description}</p>
+          <p style={{ color: 'white' }}>{breads[index].description}</p>
 
 
-        </div>
+        </button>
       ))
     )
   }
 
 
-  
+
 
 
   return (
@@ -92,9 +93,7 @@ function Home() {
         style={{
           display: "flex",
           width: "100%",
-          height: "calc(100vh - 86px)",
-          background: pal[0],
-
+          alignItems: "stretch"
         }}
       >
 
@@ -125,7 +124,8 @@ function Home() {
                 minWidth: "256px",
                 aspectRatio: "1 / 1",
                 padding: "1.5em",
-                boxShadow: boxShad
+                boxShadow: boxShad,
+                backgroundColor: pal[2]
               }}
               src='img/loafs.jpg'
               alt='your browser doesnt support this picture of bread loafs'
@@ -134,7 +134,7 @@ function Home() {
             <p
               style={{ width: "50%", padding: ".5em", textAlign: "center", fontSize: "24px", minWidth: "256px" }}
             >
-              Lets get this bread is your one stop shop to all things italian bread! With classics such as Ciabatta, Focaccia, Pane Toscano, and Pane Pugliese; Your bread journey here will be endless <span style={{ fontFamily: "judson-italic" }}>lets get this bread</span>
+              Lets get this bread is your one stop shop to all things italian bread! With classics such as Ciabatta, Focaccia, Pane Toscano, and Pane Pugliese; Your bread journey here will be endless. <span style={{ fontFamily: "judson-italic", fontWeight: "bold" }}>Lets Get This Bread</span>
             </p>
 
           </div>
@@ -157,16 +157,85 @@ function Home() {
             >
               Stick around and discover your favorite baked goods from all across the great country of italy
             </p>
-            
+
             <img
               style={{
                 width: "50%",
                 minWidth: "256px",
                 aspectRatio: "1 / 1",
                 padding: "1.5em",
-                boxShadow: boxShad
+                boxShadow: boxShad,
+                backgroundColor: pal[2]
               }}
               src='img/focaccia.jpg'
+              alt='your browser doesnt support this picture of bread loafs'
+            />
+
+          </div>
+
+
+          <div
+            style={{
+              width: "100%",
+              marginTop: "1.5em",
+              padding: "1em",
+              display: "flex",
+              alignItems: "center",
+              flexWrap: "wrap",
+              justifyContent: "center"
+            }}
+          >
+
+            <img
+              style={{
+                width: "50%",
+                minWidth: "256px",
+                aspectRatio: "1 / 1",
+                padding: "1.5em",
+                boxShadow: boxShad,
+                backgroundColor: pal[2]
+              }}
+              src='img/grissini.jpg'
+              alt='your browser doesnt support this picture of bread loafs'
+            />
+
+
+            <p
+              style={{ width: "50%", padding: ".5em", textAlign: "center", fontSize: "24px", minWidth: "256px" }}
+            >
+              Bread has been an italian custom and delicacy for thousands of years, with history dating back to the roman era
+            </p>
+
+          </div>
+
+          <div
+            style={{
+              width: "100%",
+              marginTop: "1.5em",
+              padding: "1em",
+              display: "flex",
+              alignItems: "center",
+              flexWrap: "wrap",
+              justifyContent: "center"
+            }}
+          >
+
+            <p
+              style={{ width: "50%", padding: ".5em", textAlign: "center", fontSize: "24px", minWidth: "256px" }}
+            >
+              Careful precision mixed with loving italian tradition has invited warmth out of the oven and into homes
+            </p>
+
+            <img
+              style={{
+                width: "50%",
+                minWidth: "256px",
+                aspectRatio: "1 / 1",
+                padding: "1.5em",
+                boxShadow: boxShad,
+                backgroundColor: pal[2]
+              }}
+              src='img/panesiciliano.jpg'
               alt='your browser doesnt support this picture of bread loafs'
             />
 
@@ -180,19 +249,20 @@ function Home() {
           style={{
             display: "flex",
             width: "50%",
-            background: pal[3],
-            height: "fit-content",
+            background: pal[1],
             paddingBottom: "1.5em",
             paddingTop: 0,
             margin: "1em",
             marginTop: "48px",
             borderRadius: "16px",
             flexDirection: "column",
-            alignItems: "center"
+            alignItems: "center",
+            flexGrow: "1",
+
           }}
         >
 
-          <h2 style={{color: 'white', width: "100%", textAlign: "center", background: pal[2], margin: 0, padding: ".5em", borderRadius: "16px 16px 0px 0px"}}>Some of what we got!</h2>
+          <h2 style={{ color: 'white', width: "100%", textAlign: "center", background: pal[2], margin: 0, padding: ".5em", borderRadius: "16px 16px 0px 0px" }}>Some of what we got!</h2>
 
           {breadDisplay()}
         </section>
