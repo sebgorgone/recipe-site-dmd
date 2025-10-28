@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom"
 import HeaderNav from "./components/HeaderNav";
 
 function About() {
@@ -43,14 +42,30 @@ function About() {
 
                }}
             >
+               
 
                <h2 style={{ color: 'white', width: "100%", textAlign: "center", background: pal[2], margin: 0, padding: ".5em", borderRadius: "16px 16px 0px 0px" }}>About Us</h2>
+
+               <a
+                  style={{
+                     width: "100%",
+                     display: "flex",
+                     color: pal[0],
+                     marginLeft: "1em",
+                     justifySelf: "flex-end",
+                     fontFamily: "judson-italic"
+                  }}
+                  href='#/home'
+                  // @ts-ignore
+               ><ion-icon name="arrow-undo-outline"></ion-icon>back to home</a>
 
                <h1
                   style={{ width: "100%", textAlign: "center" }}
                >
                   We are 'Lets Get This Bread'
                </h1>
+
+               
 
                <h2
                   style={{
@@ -95,7 +110,7 @@ function About() {
             >
 
                <h1
-                  style={{ width: "100%", textAlign: "center", marginTop: "1.75em" }}
+                  style={{ width: "100%", textAlign: "center" }}
                >
                   Connect With Us!
                </h1>
@@ -107,14 +122,79 @@ function About() {
                      background: pal[5],
                      alignItems: "center",
                      color: 'white',
-                     padding: "12px"
+                     padding: "12px",
+                     borderRadius: "8px",
+                     marginBottom: "16px"
                   }}
                >
 
                   {/* @ts-ignore */}
                   <ion-icon style={{fontSize: "32px", paddingRight: "16px"}}name="logo-instagram"></ion-icon>
 
-                  <a>instagram</a>
+                  <a
+                     style={{
+                        fontSize: "18px",
+                        fontFamily: "judson",
+                        color: "white"
+                     }}
+                     href='https://www.instagram.com'
+                     target='_blank'
+                  >instagram</a>
+               </div>
+
+               <div
+                  style={{
+                     display: "flex",
+                     width: "100%",
+                     background: pal[5],
+                     alignItems: "center",
+                     color: 'white',
+                     padding: "12px",
+                     borderRadius: "8px",
+                     marginBottom: "16px"
+                  }}
+               >
+
+                  {/* @ts-ignore */}
+                  <ion-icon style={{fontSize: "32px", paddingRight: "16px"}}name="logo-youtube"></ion-icon>
+
+                  <a
+                     style={{
+                        fontSize: "18px",
+                        fontFamily: "judson",
+                        color: "white"
+                     }}
+                     href='https://www.youtube.com'
+                     target="_blank"
+                  >youtube</a>
+               </div>
+
+
+               <div
+                  style={{
+                     display: "flex",
+                     width: "100%",
+                     background: pal[5],
+                     alignItems: "center",
+                     color: 'white',
+                     padding: "12px",
+                     borderRadius: "8px",
+
+                  }}
+               >
+
+                  {/* @ts-ignore */}
+                  <ion-icon style={{fontSize: "32px", paddingRight: "16px"}}name="mail-outline"></ion-icon>
+
+                  <a
+                     style={{
+                        fontSize: "18px",
+                        fontFamily: "judson",
+                        color: "white"
+                     }}
+                     href='https://www.youtube.com'
+                     target="_blank"
+                  >email us</a>
                </div>
 
             </nav>

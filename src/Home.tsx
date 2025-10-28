@@ -268,7 +268,7 @@ function Home() {
 
           {breadDisplay()}
 
-          <a href='#/about' style={{ fontFamily: 'judson-italic', width: "100%", textAlign: "center", fontSize: "24px", margin: "1em", paddingRight: "10%" }}>See More</a>
+          <a href='#/catalouge' style={{ fontFamily: 'judson-italic', width: "100%", textAlign: "center", fontSize: "24px", margin: "1em", paddingRight: "10%" }}>See More</a>
 
         </section>
 

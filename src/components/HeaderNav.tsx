@@ -169,6 +169,7 @@ function HeaderNav(props: props) {
                backgroundColor: pal[5],
                alignItems: "center",
                zIndex: 5,
+               boxShadow: boxShad
             }}
          >
 
