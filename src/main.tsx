@@ -8,6 +8,7 @@ import './index.css';
 import Home from './Home.tsx';
 import About from './About.tsx';
 import BreadPage from './components/BreadPage.tsx';
+import Catalouge from './Catalouge.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -20,6 +21,8 @@ createRoot(document.getElementById('root')!).render(
         <Route path='/home' element={<Home />} />
 
         <Route path='/about' element={<About />} />
+
+        <Route path='/catalouge' element={<Catalouge />} />
 
         {breads.map((bread, i) => (
           //@ts-ignore

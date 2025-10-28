@@ -242,7 +242,7 @@ function Home() {
 
           </div>
 
-          <a href='#/about' style={{fontFamily: 'judson-italic', width: "100%", textAlign: "center", fontSize: "24px", margin: "1em", paddingRight: "10%"}}>About Lets Get This Bread</a>
+          <a href='#/about' style={{ fontFamily: 'judson-italic', width: "100%", textAlign: "center", fontSize: "24px", margin: "1em", paddingRight: "10%" }}>About Lets Get This Bread</a>
 
 
         </article>
@@ -254,7 +254,6 @@ function Home() {
             width: "50%",
             background: pal[1],
             paddingBottom: "1.5em",
-            paddingTop: 0,
             margin: "1em",
             marginTop: "48px",
             borderRadius: "16px",
@@ -268,6 +267,9 @@ function Home() {
           <h2 style={{ color: 'white', width: "100%", textAlign: "center", background: pal[2], margin: 0, padding: ".5em", borderRadius: "16px 16px 0px 0px" }}>Some of what we got!</h2>
 
           {breadDisplay()}
+
+          <a href='#/about' style={{ fontFamily: 'judson-italic', width: "100%", textAlign: "center", fontSize: "24px", margin: "1em", paddingRight: "10%" }}>See More</a>
+
         </section>
 
       </main>

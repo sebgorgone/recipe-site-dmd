@@ -130,6 +130,19 @@ function BreadPage(props: bread) {
                   >{desc ? description : history}</p>
                </section>
 
+               <a
+                  style={{
+                     width: "100%",
+                     display: "flex",
+                     color: pal[0],
+                     marginLeft: "1em",
+                     justifySelf: "flex-end",
+                     fontFamily: "judson-italic"
+                  }}
+                  href='#/home'
+                  // @ts-ignore
+               ><ion-icon name="arrow-undo-outline"></ion-icon>back to home</a>
+
             </article>
 
 
@@ -193,9 +206,9 @@ function BreadPage(props: bread) {
                <ul
                   style={{display: "flex", fontFamily: "joan", color: "white", fontSize: "32px", flexDirection: "column", gap: "8px"}}
                >{listDisplay()}</ul> : 
-               <ul
+               <ol
                   style={{display: "flex", fontFamily: "joan", color: "white", fontSize: "32px", flexDirection: "column", gap: "8px"}}
-               >{listDisplay()}</ul>}
+               >{listDisplay()}</ol>}
             </section>
 
          </main>

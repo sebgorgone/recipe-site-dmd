@@ -28,7 +28,7 @@ function HeaderNav(props: props) {
    const navButton = {
       background: "none",
       border: "none",
-      color: pal[2]
+      color: pal[1]
    }
 
    useEffect(() => {
@@ -50,7 +50,6 @@ function HeaderNav(props: props) {
       });
 
       setSearchResults(results);
-      console.log(results)
    }, [wildCard]);
 
 
@@ -198,8 +197,9 @@ function HeaderNav(props: props) {
                      padding: "16px",
                      paddingTop: "0px",
                      paddingBottom: "18px",
-                     color: pal[2],
+                     color: pal[4],
                      width: "8px",
+                     WebkitTextStroke: `1px ${pal[1]}`
                   }}
                   type='button'
                   onClick={() => setNavBar(prev => !prev)}
