@@ -14,6 +14,51 @@ function About() {
 
    const boxShad = '0 1px 1px rgba(0, 0, 0, 0.8), 0 3px 3px rgba(0, 0, 0, 0.6), 0 6px 6px rgba(0, 0, 0, 0.4), 0 8px 8px rgba(0, 0, 0, 0.3)';
 
+   function imageTrio (url1: string, url2 : string, url3 : string) {
+
+      const imgstl={
+         width: "128px",
+         height: "128px",
+         boxShadow: boxShad,
+         borderRadius: "4px",
+      }
+
+      const alt = 'picture of bread'
+
+
+      return(
+         <div
+            style={{
+               width: "100%",
+               justifyContent: "space-around",
+               flexWrap: "wrap",
+               display: "flex",
+            }}
+         >
+
+            <img 
+               style={imgstl}
+               alt={alt}
+               src={url1}
+            />
+
+            <img 
+               style={imgstl}
+               alt={alt}
+               src={url2}
+            />
+
+            <img 
+               style={imgstl}
+               alt={alt}
+               src={url3}
+            />
+
+
+         </div>
+      )
+   }
+
 
    return (
       <>
@@ -65,12 +110,15 @@ function About() {
                   We are 'Lets Get This Bread'
                </h1>
 
-               
+
+               {imageTrio('img/grissini.jpg', 'img/ciabatta.jpg', 'img/panedialtamura.jpg')}
+
+
 
                <h2
                   style={{
                      width: "100%",
-                     padding: "10%",
+                     padding: "8px",
                   }}
                >
                   We are bread enthusiasts who love all
@@ -85,10 +133,13 @@ function About() {
                </h2>
 
 
+               {imageTrio('img/panetoscano.jpg', 'img/panedilatte.jpeg', 'img/panedialtamuraintegrale.jpg')}
+
+
                <h2
                   style={{
                      width: "100%",
-                     padding: "10%",
+                     padding: "8px",
                      margin: "0"
                   }}
                >
@@ -103,9 +154,10 @@ function About() {
                style={{
                   display: "flex",
                   width: "50%",
-                  justifyContent: "flex-start",
+                  justifyContent: "space-between",
                   flexDirection: "column",
-                  padding: "5vw"
+                  padding: "16px",
+                  flexGrow: "1"
                }}
             >
 
@@ -123,8 +175,8 @@ function About() {
                      alignItems: "center",
                      color: 'white',
                      padding: "12px",
-                     borderRadius: "8px",
-                     marginBottom: "16px"
+                     borderRadius: "32px",
+                     height: "150px"
                   }}
                >
 
@@ -133,7 +185,7 @@ function About() {
 
                   <a
                      style={{
-                        fontSize: "18px",
+                        fontSize: "24px",
                         fontFamily: "judson",
                         color: "white"
                      }}
@@ -150,8 +202,8 @@ function About() {
                      alignItems: "center",
                      color: 'white',
                      padding: "12px",
-                     borderRadius: "8px",
-                     marginBottom: "16px"
+                     borderRadius: "32px",
+                     height: "150px"
                   }}
                >
 
@@ -160,7 +212,7 @@ function About() {
 
                   <a
                      style={{
-                        fontSize: "18px",
+                        fontSize: "24px",
                         fontFamily: "judson",
                         color: "white"
                      }}
@@ -178,8 +230,8 @@ function About() {
                      alignItems: "center",
                      color: 'white',
                      padding: "12px",
-                     borderRadius: "8px",
-
+                     borderRadius: "32px",
+                     height: "150px"
                   }}
                >
 
@@ -188,7 +240,7 @@ function About() {
 
                   <a
                      style={{
-                        fontSize: "18px",
+                        fontSize: "24px",
                         fontFamily: "judson",
                         color: "white"
                      }}

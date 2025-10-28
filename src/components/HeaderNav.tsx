@@ -45,8 +45,6 @@ function HeaderNav(props: props) {
          const description = normalize(bread.description);
 
          if (name.includes(normalizedQuery) || description.includes(normalizedQuery)) return true;
-
-         return bread.recipe.some(prev => normalize(prev).includes(normalizedQuery));
       });
 
       setSearchResults(results);
@@ -77,12 +75,111 @@ function HeaderNav(props: props) {
 
       const display = [];
 
+      function splitToArray(original: string, query: string) {
+         const normalized = original.toLowerCase().replace(/\s+/g, '');
+         const normalizedQuery = query.toLowerCase().replace(/\s+/g, '');
+         const normIndex = normalized.indexOf(normalizedQuery);
+         if (normIndex === -1) return [original, '', ''];
+
+         let count = 0;
+         let start = 0;
+
+         for (let i = 0; i < original.length; i++) {
+            if (original[i] !== ' ') {
+               if (count === normIndex) {
+                  start = i;
+                  break;
+               }
+               count++;
+            }
+         };
+
+         count = 0;
+         let end = original.length;
+         for (let i = 0; i < original.length; i++) {
+            if (original[i] !== ' ') {
+               if (count === normIndex + normalizedQuery.length) {
+                  end = i;
+                  break;
+               }
+               count++;
+            }
+         };
+
+         const before = original.slice(0, start);
+         const match = original.slice(start, end);
+         const after = original.slice(end);
+
+         console.log('split field by query: ' + before + ' ' + match + ' ' + after)
+
+         return [
+            before,
+            match,
+            after
+         ]
+
+
+      }
+
       for (let i = 0; i < Math.min(limit, searchResults.length); i++) {
+
+         let name: string | string[] = searchResults[i].name;
+         let description: string | string[] = searchResults[i].description;
+
+         const normalize = (str: string) => str.toLowerCase().replace(/\s+/g, '');
+         const normalizedQuery = normalize(wildCard);
+
+
+         if (normalize(searchResults[i].name).includes(normalizedQuery)) {
+
+            name = splitToArray(searchResults[i].name, wildCard) 
+
+         }
+
+         if (normalize(searchResults[i].description).includes(normalizedQuery)) {
+
+            description = splitToArray(searchResults[i].description, wildCard) 
+
+         }
+
+
          display.push({
             imgUrl: searchResults[i].imgUrl,
-            name: searchResults[i].name,
-            description: searchResults[i].description,
+            name,
+            description
          });
+      }
+
+      function nameDisplay (name: string | string[]) {
+         if (!Array.isArray(name)) return (<p style={{ color: "grey", fontSize: "16px", marginLeft: "8px" }}>{name}</p>);
+
+         return (
+            <p style={{ color: "grey", fontSize: "16px", marginLeft: "8px" }}>
+                        {name[0]}
+                        <span style={{
+                           color: "black"
+                        }}>{name[1]}</span>
+                        {name[2]}
+                        </p>
+         )
+      }
+
+      function descDisplay (desc: string | string[]) {
+         if (!Array.isArray(desc)) return null
+
+         return (
+            <p style={{ color: "grey", fontSize: "16px", marginLeft: "8px" }}>
+                        {
+                        desc[0].length > 10 ? '...' + desc[0].slice(desc[0].length - 10) : desc[0]
+                        }
+                        <span style={{
+                           color: "black"
+                        }}>{desc[1]}</span>
+                        {
+                        desc[2].length > 30 ? desc[2].slice(0, 30) + '...' : desc[2]
+                        }
+                        </p>
+         )
       }
 
       return (
@@ -144,10 +241,23 @@ function HeaderNav(props: props) {
                         alt={`a photo of ${item.name}`}
                      />
 
-                     <p style={{ color: "balck", fontSize: "16px", marginLeft: "8px" }}>{item.name}</p>
+                     {nameDisplay(item.name)}
 
 
                   </div>
+
+                  {descDisplay(item.description) && <div
+                     style={{
+                        display: "flex",
+                        width: "100%",
+                        justifyContent: "flex-start",
+                        alignItems: "flex-end",
+                        padding: "0px",
+                        paddingLeft: "4px",
+                        paddingRight: "4px"
+                     }}
+                  >{descDisplay(item.description)}</div>}
+
                </button>
             ))}
          </div>
@@ -226,7 +336,7 @@ function HeaderNav(props: props) {
                   <button
                      style={navButton}
                      type='button'
-                     onClick={() => console.log('nav to recipe catalouge')}
+                     onClick={() => nav('/catalouge')}
                   >
                      {/* @ts-ignore */}
                      <ion-icon
@@ -244,7 +354,7 @@ function HeaderNav(props: props) {
                   <button
                      style={navButton}
                      type='button'
-                     onClick={() => console.log('nav to about')}
+                     onClick={() => nav('/about')}
                   >
                      {/* @ts-ignore */}
                      <ion-icon
@@ -262,7 +372,7 @@ function HeaderNav(props: props) {
                   <button
                      style={navButton}
                      type='button'
-                     onClick={() => nav('/#/home')}
+                     onClick={() => nav('/home')}
                   >
                      {/* @ts-ignore */}
                      <ion-icon
