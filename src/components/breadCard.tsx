@@ -35,7 +35,8 @@ function BreadCard(props: props) {
                style={{
                   width: "90%",
                   display: "flex",
-                  alignItems: "flex-end"
+                  alignItems: "flex-end",
+                  marginTop: "16px"
                }}
             >
 
